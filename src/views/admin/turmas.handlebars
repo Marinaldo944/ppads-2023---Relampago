@@ -1,0 +1,13 @@
+<a href="/admin/turmas/add"><button class="btn btn-success">Nova turma</button></a>
+
+{{#each rel_pos}}
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4>{{titulo}}</h4>
+            <P>Turno: {{turno}}</P>
+            <small>Professor: {{usuarios.nome}}</small><br>
+        </div>    
+    </div>
+{{else}}
+    <p>Nenhuma turma registrada!</p>
+{{/each}}
