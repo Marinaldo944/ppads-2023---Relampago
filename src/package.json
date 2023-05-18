@@ -8,8 +8,15 @@
     "mongodb": "^5.1.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0"
-    },
-    "scripts": {
-      "start": "node index.js"
-    }
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "name": "src",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
