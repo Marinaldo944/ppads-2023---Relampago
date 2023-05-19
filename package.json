@@ -10,7 +10,7 @@
     "passport-local": "^1.0.0"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node index.js"
   },
   "name": "src",
   "version": "1.0.0",
