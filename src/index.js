@@ -43,7 +43,7 @@ const db = require("./config/db")
         app.set("view engine", "handlebars");
     //mongoose
         mongoose.Promise = global.Promise;
-        mongoose.connect("db.mongoURI").then(() => {
+        mongoose.connect(db.mongoURI).then(() => {
         console.log("Conectado ao mongo")
       }).catch((err) => {
         console.log("Erro ao se conectar: "+err)
