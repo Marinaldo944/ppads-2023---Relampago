@@ -12,6 +12,7 @@ const passport = require("passport")
 require("./config/auth")(passport)
 const db = require("./config/db")
 const {MongoClient} = require('mongodb')
+const { error } = require("console")
 
 
 
@@ -44,10 +45,10 @@ const {MongoClient} = require('mongodb')
         app.set("view engine", "handlebars");
     //mongoose
         mongoose.Promise = global.Promise;
-        mongoose.connect(db.mongoURI).then(() => {
+        mongoose.connect(db.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
         console.log("Conectado ao mongo")
       }).catch((err) => {
-        console.log("Erro ao se conectar: "+err)
+        console.log("Erro ao se conectar: "+error)
       })  
     //public
     app.use(express.static(path.join(__dirname,"public")))
