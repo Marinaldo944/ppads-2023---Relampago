@@ -9,16 +9,20 @@
         <h4>Nova turma:</h4>
         <form action="/admin/turmas/cadastro" method="POST">
             <label for="titulo">Título:</label>
-            <input type="text" name="titulo" class="form-control">
-            <label>Matutino
-            <input id="matutino" name="turno" type="radio" value="matutino" /></label>
-            <label>Vespertino
-            <input id="vespertino" name="turno" type="radio" value="vespertino" /> </label>  
-            <label>Noturno
-            <input id="noturno" name="turno" type="radio" value="noturno" /> </label><br>
+            <input type="text" name="titulo" class="form-control" required>
             <br>
+            <h6>Turno:</h6>
+            <div class="form-check">
+                <input class="form-check-input" id="matutino" name="turno" type="radio" value="matutino" required/>
+                <label>Matutino</label><br>
+                <input class="form-check-input" id="vespertino" name="turno" type="radio" value="vespertino" required/> 
+                <label>Vespertino</label><br>  
+                <input class="form-check-input" id="noturno" name="turno" type="radio" value="noturno" required/> 
+                <label>Noturno</label>
+            </div><br>
             <label for="professor">Professor:</label>
-            <select name="professor" class="form-select">
+            <select name="professor" class="form-select mt-3" required>
+                    <option value="" disabled selected>Selecione um professor para a turma</option>
                     {{#each dados}}
                         <option value="{{_id}}">{{nome}}</option>
                     {{else}}

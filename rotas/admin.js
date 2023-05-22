@@ -11,7 +11,7 @@ const {eAdmin} = require("../helpers/eAdmin")
 const bcrypt = require("bcryptjs")
 
 rotas.get("/usuarios", async(req, res, next) => {
-        const usu = await Usuario.find({}).sort({nome:'desc'}).lean()
+        const usu = await Usuario.find({}).sort({nome:'asc'}).lean()
         res.render("admin/listaUsuario", {dados: usu});
 })
     
@@ -54,7 +54,7 @@ bcrypt.genSalt(10, (erro, salt) => {
 
 
 rotas.get("/turmas", async(req, res, next) => {
-    const cat = await Turma.find().lean()
+    const cat = await Turma.find().lean().populate("professor").sort({titulo: "asc"})
     res.render("admin/turmas", {rel_pos: cat});
 })
 
