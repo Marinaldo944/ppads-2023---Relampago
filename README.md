@@ -24,7 +24,7 @@ A seguir estão os passos sugeridos para a preparação do seu grupo no início 
 
 # Descrição
 
-*<Descrição_resumida_do_projeto>*
+*<Descrição_resumida_do_projeto_relampago>*
 
 # Documentação
 
