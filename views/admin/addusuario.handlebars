@@ -13,10 +13,13 @@
                 <input type="text" name="matricula" class="form-control" required>
             <label for="email">Email:</label>
                 <input type="email" name="email" class="form-control" required>
-            <label for="cargo">Cargo:</label>
-                <input type="text" name="cargo" class="form-control" required>
-            <label for="status">Status:</label>
-                <input type="number" name="status" class="form-control" required>
+            <h6>Perfil:</h6>
+            <div class="form-check">
+                <input class="form-check-input" id="Professor" name="cargo" type="radio" value="Professor" required/>
+                <label>Professor</label><br>
+                <input class="form-check-input" id="vespertino" name="cargo" type="radio" value="Secretaria" required/> 
+                <label>Secretaria</label><br>
+            </div>     
             <label for="senha">Senha:</label>
                 <input type="password" name="senha" class="form-control" required>
             <label for="senha2">Repita sua senha:</label>
