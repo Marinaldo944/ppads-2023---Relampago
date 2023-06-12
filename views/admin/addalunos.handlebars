@@ -1,0 +1,42 @@
+{{#each erros}}
+    <div class="alert alert-danger">{{texto}}</div>
+{{else}}
+
+{{/each}}
+
+<div class="card">
+    <div class="card-body">
+        <form action="/admin/alunos/cadastro" method="post">
+            <label for="nome">Nome:</label>
+                <input type="text" name="nome" class="form-control" required><br>
+            <div>
+                <label for="dt_nasc">Data nascimento:</label>
+                <input type="date" id="dt_nasc" name="dt_nasc" min="2003-12-31">
+            </div>
+            <br>
+            <label for="matricula">Matricula:</label>
+                <input type="text" name="matricula" class="form-control" required>
+            <label for="serie">Série:</label>
+                <input type="text" name="serie" class="form-control" required>
+            <label for="turma">Turma:</label>
+            <select name="turma" class="form-select mt-3" required>
+                    <option value="" disabled selected>Selecione uma turma para o aluno</option>
+                    {{#each dados}}
+                        <option value="{{_id}}">{{titulo}}</option>
+                    {{else}}
+                        <option value="0">Nenhuma turma cadastrada</option>
+                    {{/each}}
+            </select>
+            <br>
+            <label for="resp1">Responsável 1:</label>
+                <input type="text" name="resp1" class="form-control" required>
+            <label for="email1">Email:</label>
+                <input type="email" name="email1" class="form-control" required>
+            <label for="resp2">Responsável 2:</label>
+                <input type="text" name="resp2" class="form-control" required>
+            <label for="email2">Email:</label>
+                <input type="email" name="email2" class="form-control" required>    
+            <button type="submit" class="btn btn-success mt-4">Criar aluno</button>
+        </form> 
+    </div>
+</div>

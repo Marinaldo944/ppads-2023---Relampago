@@ -41,10 +41,10 @@ bcrypt.genSalt(10, (erro, salt) => {
         try{
             novoUsuario.save()
             req.flash("success_msg", "Usuário cadastrado com sucesso")
-            res.redirect("/")  
+            res.redirect("/admin//usuarios")  
         } catch (err){
             req.flash("error_msg", "Erro ao cadastrar usuário")
-            res.redirect("/")  
+            res.redirect("/admin/usuarios")  
         } 
     
 })
@@ -67,6 +67,7 @@ rotas.post("/turmas/cadastro", async(req, res) => {
     
         const novaTurma = new Turma ({
             titulo: req.body.titulo,
+            descricao: req.body.descricao,
             turno: req.body.turno,
             professor: req.body.professor
             })
@@ -75,6 +76,33 @@ rotas.post("/turmas/cadastro", async(req, res) => {
             res.redirect("/admin/turmas")
 })
 
+rotas.get("/alunos", async(req, res, next) => {
+    const aln = await Aluno.find().lean().populate("turma").sort({titulo: "asc"})
+    res.render("admin/aluno", {aluno: aln});
+})
+
+rotas.get("/alunos/add", async(req, res) => {
+    const turma = await Turma.find().lean().sort({titulo: "asc"})
+    res.render("admin/addalunos", {dados: turma});
+})
+
+rotas.post("/alunos/cadastro", (req, res) => {
+        
+    const novoAluno = new Aluno({
+        nome: req.body.nome,
+        dt_nasc: req.body.dt_nasc,
+        matricula: req.body.matricula,
+        serie: req.body.serie,
+        turma: req.body.turma,
+        resp1: req.body.resp1,
+        email1: req.body.email1,
+        resp2: req.body.resp2,
+        email2: req.body.email2,
+        })
+
+        novoAluno.save()
+        res.redirect("/admin/alunos")
+})
 
 
 module.exports = rotas;

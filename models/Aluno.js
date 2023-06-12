@@ -6,6 +6,10 @@ const Aluno = new Schema({
         type: String,
         required: true
     },
+    dt_nasc: {
+        type: Date,
+        require: true
+    },
     matricula: {
         type: Number,
         require: true
@@ -23,11 +27,11 @@ const Aluno = new Schema({
         type: String,
         required: true
     },
-    resp2: {
+    email1: {
         type: String,
         required: true
     },
-    email1: {
+    resp2: {
         type: String,
         required: true
     },
