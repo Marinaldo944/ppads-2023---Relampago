@@ -1,14 +1,10 @@
 <a href="/admin/alunos/add"><button class="btn btn-success">Novo aluno</button></a>
 
+<ul>
 {{#each aluno}}
-    <div class="card mt-4">
-        <div class="card-body">
-            <h4>{{nome}}</h4>
-            <P>Matrícula: {{matricula}}</P>
-            <p>Série: {{serie}}</p>
-            <small>Turma: {{turma.titulo}}</small><br>
-        </div>    
-    </div>
+    <li>{{matricula}} -- {{nome}} -- {{turma.titulo}} </li> 
+                 
 {{else}}
     <p>Nenhum aluno registrado!</p>
 {{/each}}
+</ul>

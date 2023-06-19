@@ -3,6 +3,7 @@ const handlebars = require("express-handlebars")
 const bodyParser = require("body-parser")
 const app = express()
 const admin = require("./rotas/admin")
+const prof = require("./rotas/prof")
 const path = require("path")
 const mongoose  = require("mongoose")
 const session = require("express-session")
@@ -60,6 +61,7 @@ app.get("/", function(req, res){
 });
 
 app.use("/admin", admin)
+app.use("/prof", prof)
 
 //outros
 const PORT = process.env.PORT || 8081
