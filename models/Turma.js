@@ -19,6 +19,10 @@ const Turma = new Schema({
         ref: "usuarios",
         required: true
     },
+    dias:{
+        type: Number,
+        required: true
+    }
 })
 
 mongoose.model("turmas", Turma)

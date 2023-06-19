@@ -11,7 +11,7 @@ const Aluno = new Schema({
         require: true
     },
     matricula: {
-        type: Number,
+        type: String,
         require: true
     },
     serie: {

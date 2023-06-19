@@ -1,0 +1,27 @@
+
+<h4>Relação de alunos da turma {{tma.titulo}}:</h4>
+
+
+<div class="card">
+    <div class="card-body">
+        <form action="/admin/usuarios/cadastro" method="post">
+{{#each aluno}}
+            <table border="1">
+                <tr>
+                    <td style="width:90px">{{matricula}}</td>
+                    <td style="width:200px">{{nome}}</td>
+                    <td><input class="form-check-input" id="presente" name="{{matricula}}" type="radio" value="presente" required/>
+                    <label>Presente</label></td>
+                    <td><input class="form-check-input" id="ausente" name="{{matricula}}" type="radio" value="ausente" required/> 
+                    <label>Ausente</label></td>
+                    <td><input class="form-check-input" id="atestado" name="{{matricula}}" type="radio" value="atestado" required/> 
+                    <label>Atestado médico</label></td>
+                </tr>
+            </table>             
+{{else}}
+    <p>Nenhum aluno registrado!</p>
+{{/each}}
+            <button type="submit" class="btn btn-success mt-4">Criar usuário</button>
+        </form> 
+    </div>
+</div>

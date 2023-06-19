@@ -59,7 +59,7 @@ rotas.get("/turmas", async(req, res, next) => {
 })
 
 rotas.get("/turmas/add", async(req, res) => {
-    const prof = await Usuario.find().lean()
+    const prof = await Usuario.find({cargo: "Professor"}).lean()
     res.render("admin/addturmas", {dados: prof});
 })
 
@@ -69,7 +69,8 @@ rotas.post("/turmas/cadastro", async(req, res) => {
             titulo: req.body.titulo,
             descricao: req.body.descricao,
             turno: req.body.turno,
-            professor: req.body.professor
+            professor: req.body.professor,
+            dias: req.body.dias
             })
 
             novaTurma.save()
