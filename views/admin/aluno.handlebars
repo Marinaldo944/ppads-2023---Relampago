@@ -2,7 +2,8 @@
 
 <ul>
 {{#each aluno}}
-    <li>{{matricula}} -- {{nome}} -- {{turma.titulo}} </li> 
+    <li style="display:inline-block">{{matricula}} -- {{nome}} -- {{turma.titulo}} </li> 
+    <a href="/admin/alunos/del/{{_id}}"><button class="btn btn-link" style="display:inline-block">Excluir aluno</button></a><br>
                  
 {{else}}
     <p>Nenhum aluno registrado!</p>
