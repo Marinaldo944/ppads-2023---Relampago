@@ -10,7 +10,6 @@ const Turma = mongoose.model("turmas")
 require("../models/Registro")
 const Registro = mongoose.model("registro")
 const {eAdmin} = require("../helpers/eAdmin")
-const nodemailer = require("nodemailer")
 
 
 
@@ -60,41 +59,9 @@ rotas.post("/regchamada", async(req, res) =>{
                         faltas.push(falta)
                        }
                 }
+        res.redirect("/prof")             
                 
-                async function main() {
-
-                        // Get Mailer To Go SMTP connection details
-                        let mailertogo_host     = process.env.MAILERTOGO_SMTP_HOST;
-                        let mailertogo_port     = process.env.MAILERTOGO_SMTP_PORT || 587;
-                        let mailertogo_user     = process.env.MAILERTOGO_SMTP_USER;
-                        let mailertogo_password = process.env.MAILERTOGO_SMTP_PASSWORD;
-                        let mailertogo_domain   = process.env.MAILERTOGO_DOMAIN || "mydomain.com";
                 
-                let transporter = nodemailer.createTransport({
-                        host: mailertogo_host,
-                        port: mailertogo_port,
-                        requireTLS: true, // Must use STARTTLS
-                        auth: {
-                                user: mailertogo_user,
-                                pass: mailertogo_password,
-                        }
-                })
-                
-                let from = `"Sistema-chamada" <noreply@${mailertogo_domain}>`;
-                faltas.forEach(aluno => {
-                        const mail1 = aluno.email1;
-                        const mail2 = aluno.email2;
-                        transporter.sendMail({
-                        from: from,
-                        to: mail1, mail2,
-                        subject: "Mensagem automátca do sistema de controle de frequência da escola ABC",
-                        text: "Sr(a) responsável pelo aluno"+faltas.nome+", informamos que o referido aluno já atingiu o limite de 30% de ausência para o periodo letivo",
-                        })
-                        console.log("Message sent: %$", info.messageId);
-                        console.log(faltas)
-                        res.redirect("/prof")
-                        })
-                }
         
 })
                
