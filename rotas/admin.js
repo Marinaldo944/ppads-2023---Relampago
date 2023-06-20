@@ -7,6 +7,8 @@ require("../models/Usuario")
 const Usuario = mongoose.model("usuarios")
 require("../models/Turma")
 const Turma = mongoose.model("turmas")
+require("../models/Registro")
+const Registro = mongoose.model("registro")
 const {eAdmin} = require("../helpers/eAdmin") 
 const bcrypt = require("bcryptjs")
 
@@ -105,5 +107,19 @@ rotas.post("/alunos/cadastro", (req, res) => {
         res.redirect("/admin/alunos")
 })
 
+rotas.get("/alunos/del/:id", async(req, res) => {
+    const del = await Aluno.findByIdAndDelete({_id: req.params.id})
+    res.redirect("/admin/alunos")
+})
+
+rotas.get("/turmas/del/:id", async(req, res) => {
+    const del = await Turma.findByIdAndDelete({_id: req.params.id})
+    res.redirect("/admin/turmas")
+})
+
+rotas.post("/usuario/deletar", async(req, res) => {
+    const del = await Usuario.findByIdAndDelete({_id: req.body.id})
+    res.redirect("/admin/usuarios")
+})
 
 module.exports = rotas;
