@@ -1,9 +1,9 @@
 module.exports = {
     eAdmin: function(req, res, next){
-        if(req.isAuthenticated() && req.user.status == 1){
+        if(req.isAuthenticated() && req.user.cargo == "Secretaria"){
             return next();
         }else{
-        req.flash("error_msg", "Você precisa ser um administrador")
+        req.flash("error_msg", "Você precisa ter o perfil de secretaria")
         res.redirect("/")
     }
 }

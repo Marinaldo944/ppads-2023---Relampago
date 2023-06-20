@@ -9,22 +9,23 @@ require("../models/Turma")
 const Turma = mongoose.model("turmas")
 require("../models/Registro")
 const Registro = mongoose.model("registro")
-const {eAdmin} = require("../helpers/eAdmin")
+const {eProf} = require("../helpers/eProf")
 
 
 
-rotas.get("/", async(req, res, next) => {
-        const tur = await Turma.find().lean().sort({titulo: "asc"})
+rotas.get("/", eProf, async(req, res, next) => {
+        const prof = req.user._id
+        const tur = await Turma.find({professor: prof}).lean().sort({titulo: "asc"})
         res.render("prof/index", {dados: tur});
 })
 
-rotas.get("/listaTurma/:id", async(req, res, next) => {
+rotas.get("/listaTurma/:id", eProf, async(req, res, next) => {
         const tma = await Turma.findOne({_id: req.params.id}).lean()
         const aln = await Aluno.find({turma: req.params.id}).lean().sort({nome: "asc"})
         res.render("prof/listaTurma", {tma: tma, aluno: aln});
 })
 
-rotas.post("/regchamada", async(req, res) =>{
+rotas.post("/regchamada", eProf, async(req, res) =>{
                const dados = req.body;
                const chave = Object.keys(dados)[0];
                var aln = await Aluno.findOne({matricula: chave}).populate("turma")
@@ -57,9 +58,12 @@ rotas.post("/regchamada", async(req, res) =>{
                         console.log("aluno com mais faltas que o permitido")
                         const falta = await Aluno.find({matricula: chaves[i]}).lean()
                         faltas.push(falta)
-                       }
+                        req.flash("error_msg", " Há alunos com excesso de faltas ")
+                        }
                 }
-        res.redirect("/prof")             
+                res.redirect("/prof")                             
+
+                             
                 
                 
         

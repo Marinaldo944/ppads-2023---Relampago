@@ -12,17 +12,17 @@ const Registro = mongoose.model("registro")
 const {eAdmin} = require("../helpers/eAdmin") 
 const bcrypt = require("bcryptjs")
 
-rotas.get("/usuarios", async(req, res, next) => {
+rotas.get("/usuarios", eAdmin, async(req, res, next) => {
         const usu = await Usuario.find({}).sort({nome:'asc'}).lean()
         res.render("admin/listaUsuario", {dados: usu});
 })
     
 
-rotas.get("/usuarios/add", (req, res) => {
+rotas.get("/usuarios/add", eAdmin, (req, res) => {
     res.render("admin/addusuario")
 }) 
 
-rotas.post("/usuarios/cadastro", (req, res) => {
+rotas.post("/usuarios/cadastro", eAdmin, (req, res) => {
         
     const novoUsuario = new Usuario({
         nome: req.body.nome,
@@ -55,17 +55,17 @@ bcrypt.genSalt(10, (erro, salt) => {
 
 
 
-rotas.get("/turmas", async(req, res, next) => {
+rotas.get("/turmas", eAdmin, async(req, res, next) => {
     const cat = await Turma.find().lean().populate("professor").sort({titulo: "asc"})
     res.render("admin/turmas", {rel_pos: cat});
 })
 
-rotas.get("/turmas/add", async(req, res) => {
+rotas.get("/turmas/add", eAdmin, async(req, res) => {
     const prof = await Usuario.find({cargo: "Professor"}).lean()
     res.render("admin/addturmas", {dados: prof});
 })
 
-rotas.post("/turmas/cadastro", async(req, res) => {
+rotas.post("/turmas/cadastro", eAdmin, async(req, res) => {
     
         const novaTurma = new Turma ({
             titulo: req.body.titulo,
@@ -79,17 +79,17 @@ rotas.post("/turmas/cadastro", async(req, res) => {
             res.redirect("/admin/turmas")
 })
 
-rotas.get("/alunos", async(req, res, next) => {
+rotas.get("/alunos", eAdmin, async(req, res, next) => {
     const aln = await Aluno.find().lean().populate("turma").sort({titulo: "asc"})
     res.render("admin/aluno", {aluno: aln});
 })
 
-rotas.get("/alunos/add", async(req, res) => {
+rotas.get("/alunos/add", eAdmin, async(req, res) => {
     const turma = await Turma.find().lean().sort({titulo: "asc"})
     res.render("admin/addalunos", {dados: turma});
 })
 
-rotas.post("/alunos/cadastro", (req, res) => {
+rotas.post("/alunos/cadastro", eAdmin, (req, res) => {
         
     const novoAluno = new Aluno({
         nome: req.body.nome,
@@ -107,19 +107,21 @@ rotas.post("/alunos/cadastro", (req, res) => {
         res.redirect("/admin/alunos")
 })
 
-rotas.get("/alunos/del/:id", async(req, res) => {
+rotas.get("/alunos/del/:id", eAdmin, async(req, res) => {
     const del = await Aluno.findByIdAndDelete({_id: req.params.id})
     res.redirect("/admin/alunos")
 })
 
-rotas.get("/turmas/del/:id", async(req, res) => {
+rotas.get("/turmas/del/:id", eAdmin, async(req, res) => {
     const del = await Turma.findByIdAndDelete({_id: req.params.id})
     res.redirect("/admin/turmas")
 })
 
-rotas.post("/usuario/deletar", async(req, res) => {
+rotas.post("/usuario/deletar", eAdmin, async(req, res) => {
     const del = await Usuario.findByIdAndDelete({_id: req.body.id})
     res.redirect("/admin/usuarios")
 })
+
+
 
 module.exports = rotas;

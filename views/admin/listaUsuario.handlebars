@@ -8,7 +8,6 @@
             <h4>Nome: {{nome}}</h4>
             <small>Matrícula: {{matricula}}</small><br>
             <small>Cargo: {{cargo}}</small><br>
-            <a href="/admin/usuario/edit/{{_id}}"><button class="btn btn-success mt-4">Editar usuário</button></a>
             <form action="/admin/usuario/deletar" method="POST">
                 <input type="hidden" name="id" value="{{_id}}">
                 <button type="submit" class="btn btn-danger mt-2">Deletar usuário</button>
