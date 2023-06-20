@@ -24,14 +24,13 @@
         <li class="nav-item">
         <a class="nav-link" href="/admin/turmas/add">Criar turmas</a>
         </li>
-        </div>
         {{#if user}}
         <li class="nav-item">
-          <a class="nav-link active" href="/usuario/logout">Sair</a>
+        <a class="nav-link active" href="/logout">{{user.nome}},  Sair</a>
         </li>
         {{else}}
         {{/if}}
-      </ul>
+        </ul>
       </div>
   </div>
 </nav>

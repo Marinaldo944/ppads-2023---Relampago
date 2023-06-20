@@ -60,6 +60,33 @@ app.get("/", function(req, res){
     res.render("admin/index")
 });
 
+app.post("/login", (req, res, next) => {
+    passport.authenticate("local", {
+        successRedirect: "/entrar",
+        failureRedirect: "/",
+        failureFlash: true
+    })(req, res, next)
+})
+
+app.get("/entrar", (req, res) => {
+    if(req.isAuthenticated() && req.user.cargo == "Secretaria"){
+        res.redirect("/admin/usuarios")
+    }else{
+        res.redirect("/prof");
+    }
+})
+
+app.get("/logout", (req, res) => {
+    req.logout((err) =>{
+        if(err){
+            return next(err)
+            }else{
+            req.flash("success_msg", "Deslogado com sucesso")
+            res.redirect("/")
+            }
+    })
+})
+
 app.use("/admin", admin)
 app.use("/prof", prof)
 
